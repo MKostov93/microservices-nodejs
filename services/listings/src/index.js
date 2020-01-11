@@ -1,3 +1,10 @@
-import path from "path";
+/**
+ * EXTERNAL DEPENDENCIES.
+ */
+import "@babel/polyfill";
 
-console.log("listing service is working");
+/**
+ * INTERNAL DEPENDENCIES.
+ */
+import "../config/database/connection";
+import "./server";

@@ -1,3 +1,9 @@
-import path from "path";
+/**
+ * EXTERNAL DEPENDENCIES.
+ */
+import "@babel/polyfill";
 
-console.log("users service is working");
+/**
+ * INTERNAL DEPENDENCIES.
+ */
+import "../config/database/connection.js";
