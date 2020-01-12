@@ -1,11 +1,15 @@
 version: "3"
 services:
   listings-service:
-    build: "./services/listings"
+    build:
+      context: "."
+      dockerfile: "./services/listings/Dockerfile"
     depends_on:
       - listings-service-db
     environment:
       - DB_URI=mysql://root:password@listings-service-db/db?charset=UTF8
+    ports:
+      - 7100:7100
     volumes:
       - ./services/listings:/opt/app
 
@@ -18,11 +22,15 @@ services:
       - 0.0.0.0:7200:3306
 
   users-service:
-    build: "./services/users"
+    build:
+      context: "."
+      dockerfile: "./services/users/Dockerfile"
     depends_on:
       - users-service-db
     environment:
       - DB_URI=mysql://root:password@users-service-db/db?charset=UTF8
+    ports:
+      - 7101:7101
     volumes:
       - ./services/users:/opt/app
 

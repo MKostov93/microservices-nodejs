@@ -23,7 +23,7 @@ import errorHandler from "./middleware/errorHandler";
 /**
  * Get service PORT.
  */
-const PORT = accessEnv("PORT", 7100);
+const PORT = accessEnv("PORT", 7101);
 
 /**
  * Create Express server.
@@ -51,7 +51,7 @@ app.use(
 /**
  * API routes.
  */
-app.use("/", routes);
+app.use("/api", routes);
 
 /**
  * Error Handler.
@@ -62,5 +62,5 @@ app.use(errorHandler);
  * Start Express server.
  */
 app.listen(PORT, "0.0.0.0", () =>
-  console.info(`Listings service listening on ${PORT}!`)
+  console.info(`Users service listening on ${PORT}!`)
 );

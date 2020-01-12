@@ -6,4 +6,5 @@ import "@babel/polyfill";
 /**
  * INTERNAL DEPENDENCIES.
  */
-import "../config/database/connection.js";
+import "../config/database/connection";
+import "./server";
