@@ -51,7 +51,7 @@ app.use(
 /**
  * API routes.
  */
-app.use("/api", routes);
+app.use("/", routes);
 
 /**
  * Error Handler.

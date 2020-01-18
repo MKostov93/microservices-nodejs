@@ -1,5 +1,11 @@
+/**
+ * EXTERNAL DEPENDENCIES.
+ */
 import { DataTypes, Model } from "sequelize";
 
+/**
+ * INTERNAL DEPENDENCIES.
+ */
 import sequelize from "../../../../config/database/connection";
 
 export class Listing extends Model {}

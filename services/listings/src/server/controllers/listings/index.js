@@ -1,3 +1,6 @@
+/**
+ * MODELS.
+ */
 import { Listing } from "../../../database/models/listing";
 
 export const getListings = async (req, res, next) => {
