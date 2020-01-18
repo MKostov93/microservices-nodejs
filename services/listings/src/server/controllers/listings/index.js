@@ -1,6 +1,9 @@
+import { Listing } from "../../../database/models/listing";
+
 export const getListings = async (req, res, next) => {
   try {
-    res.status(200).json({ message: "Example Message" });
+    const listings = await Listing.findAll();
+    return res.status(200).json(listings);
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
