@@ -30,13 +30,15 @@ const apolloServer = new ApolloServer({
   resolvers,
   typeDefs,
   formatError(err) {
-    if (!err.originalError) {
+    if (!err?.originalError?.response?.body) {
       return err;
     }
 
-    const data = err.originalError.data;
-    const message = err.message || "An error occurred.";
-    const statusCode = err.originalError.statusCode || 500;
+    const errorDetails = JSON.parse(err.originalError.response.body);
+
+    const data = errorDetails.data;
+    const message = errorDetails.message || "An error occurred.";
+    const statusCode = errorDetails.statusCode || 500;
 
     return { message, statusCode, data };
   }
