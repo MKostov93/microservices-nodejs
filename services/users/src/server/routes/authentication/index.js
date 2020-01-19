@@ -6,7 +6,7 @@ import express from "express";
 /**
  * CONTROLLERS.
  */
-import { createUser } from "../../controllers/authentication";
+import { createUser, createSession } from "../../controllers/authentication";
 
 /**
  * INITIALIZE.
@@ -14,8 +14,9 @@ import { createUser } from "../../controllers/authentication";
 const router = express.Router();
 
 /**
- * Example routes.
+ * Authentication routes.
  */
 router.post("/users", createUser);
+router.post("/sessions", createSession);
 
 export default router;
