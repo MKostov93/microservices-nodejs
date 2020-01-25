@@ -10,32 +10,32 @@ import { ThemeProvider } from "styled-components";
 /**
  * SERVICE WORKERS.
  */
-import * as serviceWorker from "./serviceWorker";
+import * as serviceWorker from "serviceWorker";
 
 /**
  * GRAPHQL CLIENT.
  */
-import graphqlClient from "./config/graphqlClient";
+import graphqlClient from "config/graphqlClient";
 
 /**
  * STORE.
  */
-import configureStore from "./store";
+import configureStore from "store";
 
 /**
  * THEME.
  */
-import * as theme from "./theme";
+import * as theme from "theme";
 
 /**
  * STYLES.
  */
-import "./index.css";
+import "index.css";
 
 /**
  * COMPONENTS.
  */
-import App from "./App";
+import App from "App";
 
 const store = configureStore(window.REDUX_INITIAL_DATA);
 const app = (

@@ -1,7 +1,7 @@
 /**
  * GRAPHQL CLIENT.
  */
-import graphqlClient from "../../config/graphqlClient";
+import graphqlClient from "config/graphqlClient";
 
 class Api {
   constructor(client) {
