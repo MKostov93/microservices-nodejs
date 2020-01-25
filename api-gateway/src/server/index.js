@@ -34,13 +34,16 @@ const apolloServer = new ApolloServer({
       return err;
     }
 
-    const errorDetails = JSON.parse(err.originalError.response.body);
+    try {
+      const errorDetails = JSON.parse(err?.originalError?.response?.body);
+      const data = errorDetails.data;
+      const message = errorDetails.message || "An error occurred.";
+      const statusCode = errorDetails.statusCode || 500;
 
-    const data = errorDetails.data;
-    const message = errorDetails.message || "An error occurred.";
-    const statusCode = errorDetails.statusCode || 500;
-
-    return { message, statusCode, data };
+      return { message, statusCode, data };
+    } catch (error) {
+      console.log(error);
+    }
   }
 });
 
