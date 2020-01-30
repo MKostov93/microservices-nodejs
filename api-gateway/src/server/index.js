@@ -18,6 +18,11 @@ import typeDefs from "../graphql/typeDefs";
 import accessEnv from "../../src/utils/accessEnv";
 
 /**
+ * MIDDLEWARES.
+ */
+import injectSession from './middleware/injectSession';
+
+/**
  * Get service PORT.
  */
 const PORT = accessEnv("PORT", 7000);
@@ -59,16 +64,10 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: (origin, cb) => cb(null, true),
-    credentials: true,
-    preflightContinue: true,
-    exposedHeaders: [
-      "Access-Control-Allow-Headers",
-      "Access-Control-Allow-Origin, Origin, X-Requested-With, Content-Type, Accept",
-      "X-Password-Expired"
-    ],
-    optionsSuccessStatus: 200
+    credentials: true
   })
 );
+app.use(injectSession);
 
 /**
  * Apply Apollo middlewares.

@@ -12,8 +12,12 @@ const LISTINGS_SERVICE_URI = accessEnv("LISTINGS_SERVICE_URI");
 
 export default class ListingsService {
   static async fetchListings() {
-    return await got
-      .get(`${LISTINGS_SERVICE_URI}/listings`)
-      .json();
+    try {
+      return await got
+        .get(`${LISTINGS_SERVICE_URI}/listings`)
+        .json();
+    } catch (err) {
+      console.log(err.response.body);
+    }
   }
 }

@@ -15,7 +15,7 @@ import * as serviceWorker from "serviceWorker";
 /**
  * GRAPHQL CLIENT.
  */
-import graphqlClient from "config/graphqlClient";
+import graphqlClient from "api/graphqlClient";
 
 /**
  * STORE.

@@ -41,6 +41,24 @@ export const createUser = async (req, res, next) => {
   }
 };
 
+export const getUser = async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId);
+
+    if (!user) {
+      return next(new Error('Invalid user!'));
+    }
+
+    return res.json(user);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+
+    next(err);
+  }
+};
+
 export const createSession = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -75,15 +93,15 @@ export const createSession = async (req, res, next) => {
   }
 };
 
-export const getUser = async (req, res, next) => {
+export const getUserSession = async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.userId);
+    const userSession = await UserSession.findByPk(req.params.sessionId);
 
-    if (!user) {
-      return next(new Error('Invalid user!'));
+    if (!userSession) {
+      return next(new Error('Invalid session!'));
     }
 
-    return res.json(user);
+    return res.json(userSession);
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;

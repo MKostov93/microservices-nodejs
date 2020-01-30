@@ -12,24 +12,46 @@ const USERS_SERVICE_URI = accessEnv("USERS_SERVICE_URI");
 
 export default class UsersService {
   static async createUser({ email, password }) {
-    return await got
-      .post(`${USERS_SERVICE_URI}/users`, {
-        json: { email, password }
-      })
-      .json();
+    try {
+      return await got
+        .post(`${USERS_SERVICE_URI}/users`, {
+          json: { email, password }
+        })
+        .json();
+    } catch (err) {
+      console.log(err.response.body);
+    }
   }
 
   static async fetchUser({ userId }) {
-    return await got
-      .get(`${USERS_SERVICE_URI}/users/${userId}`)
-      .json();
+    try {
+      return await got
+        .get(`${USERS_SERVICE_URI}/users/${userId}`)
+        .json();
+    } catch (err) {
+      console.log(err.response.body);
+    }
   }
 
   static async createUserSession({ email, password }) {
-    return await got
-      .post(`${USERS_SERVICE_URI}/sessions`, {
-        json: { email, password }
-      })
-      .json();
+    try {
+      return await got
+        .post(`${USERS_SERVICE_URI}/sessions`, {
+          json: { email, password }
+        })
+        .json();
+    } catch (err) {
+      console.log(err.response.body);
+    }
+  }
+
+  static async fetchUserSession({ sessionId }) {
+    try {
+      return await got
+        .get(`${USERS_SERVICE_URI}/sessions/${sessionId}`)
+        .json();
+    } catch (err) {
+      console.log(err.response.body);
+    }
   }
 }

@@ -3,6 +3,12 @@
  */
 import React from 'react'
 import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-apollo';
+
+/**
+ * MUTATIONS.
+ */
+import { CREATE_USER_SESSION_MUTATION } from 'api/mutation/user';
 
 /**
  * COMPONENTS.
@@ -17,9 +23,15 @@ const Login = () => {
         handleSubmit,
         register
     } = useForm();
+    const [createUserSession] = useMutation(CREATE_USER_SESSION_MUTATION);
 
-    const onSubmit = handleSubmit(({ email, password }) => {
-        console.log(email, password);
+    const onSubmit = handleSubmit(async ({ email, password }) => {
+        const result = await createUserSession({
+            variables: {
+                email,
+                password
+            }
+        });
     });
 
     return (
@@ -45,6 +57,10 @@ const Login = () => {
                     name="password"
                     ref={register}
                     autoComplete="new-password" />
+            </FormRow>
+
+            <FormRow>
+                <button type="submit">Login</button>
             </FormRow>
         </form>
     )

@@ -18,6 +18,10 @@ const authTypeDefs = gql`
     user: User!
   }
 
+  extend type Query {
+    userSession(me: Boolean!): UserSession
+  }
+
   extend type Mutation {
     createUser(email: String!, password: String!): User!
     createUserSession(email: String!, password: String!): UserSession!
