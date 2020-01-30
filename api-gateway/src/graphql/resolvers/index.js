@@ -3,7 +3,8 @@
  */
 import * as Query from "./Query";
 import * as Mutation from "./Mutation";
+import UserSession from './Custom/UserSession';
 
-const resolvers = { Query, Mutation };
+const resolvers = { Query, Mutation, UserSession };
 
 export default resolvers;

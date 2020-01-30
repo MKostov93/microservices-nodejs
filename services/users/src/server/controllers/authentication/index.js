@@ -74,3 +74,21 @@ export const createSession = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getUser = async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId);
+
+    if (!user) {
+      return next(new Error('Invalid user!'));
+    }
+
+    return res.json(user);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+
+    next(err);
+  }
+};

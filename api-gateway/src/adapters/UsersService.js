@@ -19,6 +19,12 @@ export default class UsersService {
       .json();
   }
 
+  static async fetchUser({ userId }) {
+    return await got
+      .get(`${USERS_SERVICE_URI}/users/${userId}`)
+      .json();
+  }
+
   static async createUserSession({ email, password }) {
     return await got
       .post(`${USERS_SERVICE_URI}/sessions`, {
