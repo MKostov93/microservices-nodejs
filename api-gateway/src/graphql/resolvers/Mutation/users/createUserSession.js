@@ -3,12 +3,10 @@
  */
 import UsersService from "../../../../adapters/UsersService";
 
-const createUserSessionResolver = async (obj, { email, password }, context) => {
+const createUserSessionResolver = async (obj, { email, password }, { res }) => {
   const userSession = await UsersService.createUserSession({ email, password });
 
-  context.res.cookie("userSessionId", userSession.id, { httpOnly: true });
-
-  console.log(userSession);
+  res.cookie("userSessionId", userSession.id, { httpOnly: true });
 
   return userSession;
 };

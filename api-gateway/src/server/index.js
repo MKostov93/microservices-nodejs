@@ -26,7 +26,7 @@ const PORT = accessEnv("PORT", 7000);
  * Create Apollo server.
  */
 const apolloServer = new ApolloServer({
-  context: a => a,
+  context: ({ req, res }) => ({ req, res }),
   resolvers,
   typeDefs,
   formatError(err) {
