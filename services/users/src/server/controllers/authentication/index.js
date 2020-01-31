@@ -110,3 +110,23 @@ export const getUserSession = async (req, res, next) => {
     next(err);
   }
 };
+
+export const deleteUserSession = async (req, res, next) => {
+  try {
+    const userSession = await UserSession.findByPk(req.params.sessionId);
+
+    if (!userSession) {
+      return next(new Error('Invalid session!'));
+    }
+
+    await userSession.destroy();
+
+    return res.end();
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+
+    next(err);
+  }
+};

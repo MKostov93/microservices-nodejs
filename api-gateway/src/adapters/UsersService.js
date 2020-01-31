@@ -54,4 +54,14 @@ export default class UsersService {
       console.log(err.response.body);
     }
   }
+
+  static async deleteUserSession({ sessionId }) {
+    try {
+      return await got
+        .delete(`${USERS_SERVICE_URI}/sessions/${sessionId}`)
+        .json();
+    } catch (err) {
+      console.log(err.response.body);
+    }
+  }
 }
