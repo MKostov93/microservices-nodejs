@@ -23,7 +23,7 @@ import {
 /**
  * CONTAINERS.
  */
-import Login from 'containers/Login/Login';
+import Authentication from 'containers/Authentication/Authentication';
 
 /**
  * STYLES.
@@ -74,7 +74,7 @@ const App = () => {
         <Content>Content</Content>
 
         <Sidebar>
-          <Login />
+          <Authentication />
         </Sidebar>
       </Container>
     </Wrapper>

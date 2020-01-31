@@ -1,7 +1,7 @@
 /**
  * EXTERNAL DEPENDENCIES.
  */
-import React from 'react'
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-apollo';
 
@@ -17,7 +17,7 @@ import Input from 'components/UI/Form/Input';
 import Label from 'components/UI/Form/Label';
 import FormRow from 'components/UI/Form/FormRow';
 
-const Login = () => {
+const SignIn = () => {
     const {
         formState: { isSubmitting },
         handleSubmit,
@@ -62,10 +62,10 @@ const Login = () => {
             </FormRow>
 
             <FormRow>
-                <button type="submit">Login</button>
+                <button type="submit">Sign In</button>
             </FormRow>
         </form>
-    )
+    );
 }
 
-export default Login;
+export default SignIn;
