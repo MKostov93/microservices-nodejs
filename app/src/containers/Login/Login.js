@@ -8,7 +8,7 @@ import { useMutation } from 'react-apollo';
 /**
  * MUTATIONS.
  */
-import { CREATE_USER_SESSION_MUTATION } from 'api/mutation/user';
+import { CREATE_USER_SESSION_MUTATION } from 'api/mutation/authentication';
 
 /**
  * COMPONENTS.
@@ -32,6 +32,8 @@ const Login = () => {
                 password
             }
         });
+
+        console.log(result);
     });
 
     return (
