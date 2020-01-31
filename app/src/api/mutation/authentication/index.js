@@ -14,3 +14,9 @@ export const CREATE_USER_SESSION_MUTATION = gql`
         }
     }
 `;
+
+export const DELETE_USER_SESSION_MUTATION = gql`
+    mutation($sessionId: ID!) {
+        deleteUserSession(sessionId: $sessionId)
+    }
+`;
