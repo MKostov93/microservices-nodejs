@@ -13,6 +13,11 @@ import { DELETE_USER_SESSION_MUTATION } from 'api/mutation/authentication';
 import { authLogout } from 'store/modules/Authentication/actions';
 
 /**
+ * COMPONENTS
+ */
+import Button from 'components/UI/Button/Button';
+
+/**
  * STYLES.
  */
 const AccountContiainer = styled.div`
@@ -34,10 +39,6 @@ const AccountActions = styled.div`
     margin-top: 0.25rem;
 `;
 
-const SignOutBtn = styled.button`
-    color: blue;
-`;
-
 const Account = () => {
     const session = useSelector(state => state.auth.session);
     const dispatch = useDispatch();
@@ -49,7 +50,7 @@ const Account = () => {
         dispatch(authLogout());
 
         deleteUserSession({ variables: { sessionId: session.id } });
-    }
+    };
 
     return (
         <AccountContiainer>
@@ -59,7 +60,7 @@ const Account = () => {
             </AccountBody>
 
             <AccountActions>
-                <SignOutBtn onClick={onDeleteUserSession}>Sign Out</SignOutBtn>
+                <Button onClick={onDeleteUserSession}>Sign Out</Button>
             </AccountActions>
         </AccountContiainer>
     );
