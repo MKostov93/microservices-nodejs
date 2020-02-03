@@ -1,12 +1,12 @@
 /**
+ * EXTERNAL DEPENDENCIES.
+ */
+import produce from 'immer';
+
+/**
  * TYPES.
  */
 import * as actionTypes from './types'
-
-/**
- * UTILS.
- */
-import { updateObject } from 'utils';
 
 const initialState = {
   session: null,
@@ -14,29 +14,27 @@ const initialState = {
   loading: false,
 };
 
-const authReducer = (state = initialState, action) => {
+const authReducer = produce((draft = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
-      return updateObject(state, {
-        error: null,
-        loading: true
-      });
+      draft.error = null;
+      draft.loading = true;
+      break;
     case actionTypes.AUTH_SUCCESS:
-      return updateObject(state, {
-        session: action.payload,
-        error: null,
-        loading: false
-      });
+      draft.session = action.payload;
+      draft.error = null;
+      draft.loading = false;
+      break;
     case actionTypes.AUTH_FAIL:
-      return updateObject(state, {
-        error: action.payload,
-        loading: false
-      });
+      draft.error = action.payload;
+      draft.loading = false;
+      break;
     case actionTypes.AUTH_LOGOUT:
-      return updateObject(state, { session: null });
+      draft.session = null;
+      break;
     default:
-      return state;
+      return draft;
   }
-}
+});
 
 export default authReducer;

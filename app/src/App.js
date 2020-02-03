@@ -17,7 +17,7 @@ import { USER_SESSION_QUERY } from "api/queries/authentication";
 import {
   authStart,
   authSuccess,
-  authFail
+  authFail,
 } from "store/modules/Authentication/actions";
 
 /**

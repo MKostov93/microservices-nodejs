@@ -4,6 +4,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-apollo';
+import * as yup from 'yup';
 
 /**
  * MUTATIONS.
@@ -18,19 +19,35 @@ import Input from 'components/UI/Form/Input';
 import Label from 'components/UI/Form/Label';
 import FormRow from 'components/UI/Form/FormRow';
 
-const SignUp = () => {
+const validationSchema = yup.object().shape({
+    email: yup.string().required(),
+    password: yup
+        .string()
+        .required()
+        .test(
+            "sameAsConfirmPassword",
+            "${path} is not the same as the confirmation password",
+            function () {
+                return this.parent.password === this.parent.confirmPassword;
+            }
+        )
+});
+
+const SignUp = ({ onRedirectToLogin }) => {
     const [createUser] = useMutation(CREATE_USER_MUTATION);
     const {
-        formState: { isSubmitting },
+        formState: { isSubmitting, isValid },
         handleSubmit,
         register,
         reset
-    } = useForm();
+    } = useForm({ mode: 'onChange', validationSchema });
 
     const onSubmit = handleSubmit(async ({ email, password }) => {
         await createUser({ variables: { email, password } });
 
         reset();
+
+        onRedirectToLogin();
     });
 
     return (
@@ -72,7 +89,7 @@ const SignUp = () => {
 
             <FormRow>
                 <Button
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !isValid}
                     type="submit">
                     Sign Up
                 </Button>

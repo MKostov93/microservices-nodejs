@@ -24,7 +24,7 @@ const Authentication = () => {
 
     return (
         <>
-            {isSignup ? <SignIn /> : <SignUp />}
+            {isSignup ? <SignUp onRedirectToLogin={() => setIsSignup(false)} /> : <SignIn />}
 
             <Button
                 type="button"
