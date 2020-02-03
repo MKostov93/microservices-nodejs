@@ -70,11 +70,11 @@ export const createSession = async (req, res, next) => {
     const user = await User.findOne({ attributes: {}, where: { email } });
 
     if (!user) {
-      return next(new Error("Invalid email!"));
+      return next(new Error("Invalid credentials!"));
     }
 
     if (!compareEncryptedString(password, user.password)) {
-      return next(new Error("Incorrect password!"));
+      return next(new Error("Invalid credentials!"));
     }
 
     const userSession = await UserSession.create({

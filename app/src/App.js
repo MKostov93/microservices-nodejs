@@ -15,9 +15,9 @@ import { USER_SESSION_QUERY } from "api/queries/authentication";
  * STORE ACTIONS.
  */
 import {
-  authStart,
+  authRequest,
   authSuccess,
-  authFail,
+  authFailure,
 } from "store/modules/Authentication/actions";
 
 /**
@@ -57,11 +57,11 @@ const App = () => {
   const { loading, error, data } = useQuery(USER_SESSION_QUERY);
 
   if (loading) {
-    dispatch(authStart());
+    dispatch(authRequest());
   }
 
   if (error) {
-    dispatch(authFail(error));
+    dispatch(authFailure(error));
   }
 
   if (data?.userSession) {

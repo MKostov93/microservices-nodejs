@@ -6,8 +6,8 @@ import * as actionTypes from './types';
 /**
  * ACTIONS.
  */
-export const authStart = () => ({
-  type: actionTypes.AUTH_START
+export const authRequest = () => ({
+  type: actionTypes.AUTH_REQUEST
 });
 
 export const authSuccess = (session) => ({
@@ -15,8 +15,8 @@ export const authSuccess = (session) => ({
   payload: session
 });
 
-export const authFail = (error) => ({
-  type: actionTypes.AUTH_FAIL,
+export const authFailure = (error) => ({
+  type: actionTypes.AUTH_FAILURE,
   payload: error
 });
 
