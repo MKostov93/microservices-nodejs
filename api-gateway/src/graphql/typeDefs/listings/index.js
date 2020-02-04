@@ -13,6 +13,10 @@ const listingsTypeDefs = gql`
   extend type Query {
     listings: [Listing!]!
   }
+
+  extend type Mutation {
+    createListing(title: String!, description: String!): Listing!
+  }
 `;
 
 export default listingsTypeDefs;

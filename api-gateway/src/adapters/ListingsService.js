@@ -16,4 +16,12 @@ export default class ListingsService {
       .get(`${LISTINGS_SERVICE_URI}/listings`)
       .json();
   }
+
+  static async createListing({ title, description }) {
+    return await got
+      .post(`${LISTINGS_SERVICE_URI}/listings`, {
+        json: { title, description }
+      })
+      .json();
+  }
 }
