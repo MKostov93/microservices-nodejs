@@ -20,6 +20,6 @@ export const authFailure = (error) => ({
   payload: error
 });
 
-export const authLogout = () => ({
-  type: actionTypes.AUTH_LOGOUT
+export const authLogoutSuccess = () => ({
+  type: actionTypes.AUTH_LOGOUT_SUCCESS
 });

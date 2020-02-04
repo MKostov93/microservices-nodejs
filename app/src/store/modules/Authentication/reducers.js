@@ -17,7 +17,7 @@ const authReducer = produce((draftState = initialState, action) => {
     case actionTypes.AUTH_SUCCESS:
       draftState.session = action.payload;
       break;
-    case actionTypes.AUTH_LOGOUT:
+    case actionTypes.AUTH_LOGOUT_SUCCESS:
       draftState.session = null;
       break;
     default:

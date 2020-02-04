@@ -3,13 +3,14 @@
  */
 import React from "react";
 import styled from "styled-components";
+
 import { useDispatch } from "react-redux";
 import { useQuery } from "@apollo/react-hooks";
 
 /**
  * QUERIES.
  */
-import { USER_SESSION_QUERY } from "api/queries/authentication";
+import { USER_SESSION } from "api/queries/authentication";
 
 /**
  * STORE ACTIONS.
@@ -18,6 +19,7 @@ import {
   authRequest,
   authSuccess,
   authFailure,
+  authLogoutSuccess,
 } from "store/modules/Authentication/actions";
 
 /**
@@ -54,7 +56,7 @@ const Content = styled.div`
 
 const App = () => {
   const dispatch = useDispatch();
-  const { loading, error, data } = useQuery(USER_SESSION_QUERY);
+  const { loading, error, data } = useQuery(USER_SESSION);
 
   if (loading) {
     dispatch(authRequest());
@@ -62,6 +64,10 @@ const App = () => {
 
   if (error) {
     dispatch(authFailure(error));
+  }
+
+  if (!loading && !data?.userSession) {
+    dispatch(authLogoutSuccess());
   }
 
   if (data?.userSession) {

@@ -2,15 +2,20 @@
  * EXTERNAL DEPENDENCIES.
  */
 import React from 'react';
+import styled from 'styled-components';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { useMutation } from 'react-apollo';
-import styled from 'styled-components';
 
 /**
  * MUTATIONS.
  */
-import { DELETE_USER_SESSION_MUTATION } from 'api/mutation/authentication';
-import { authLogout } from 'store/modules/Authentication/actions';
+import { DELETE_USER_SESSION } from 'api/mutation/authentication';
+
+/**
+ * ACTIONS.
+ */
+import { authLogoutSuccess } from 'store/modules/Authentication/actions';
 
 /**
  * COMPONENTS
@@ -42,12 +47,12 @@ const AccountActions = styled.div`
 const Account = () => {
     const session = useSelector(state => state.auth.session);
     const dispatch = useDispatch();
-    const [deleteUserSession] = useMutation(DELETE_USER_SESSION_MUTATION);
+    const [deleteUserSession] = useMutation(DELETE_USER_SESSION);
 
     const onDeleteUserSession = (event) => {
         event.preventDefault();
 
-        dispatch(authLogout());
+        dispatch(authLogoutSuccess());
 
         deleteUserSession({ variables: { sessionId: session.id } });
     };

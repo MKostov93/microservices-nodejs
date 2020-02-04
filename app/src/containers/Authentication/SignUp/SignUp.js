@@ -2,14 +2,15 @@
  * EXTERNAL DEPENDENCIES.
  */
 import React from 'react';
+import * as yup from 'yup';
+
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-apollo';
-import * as yup from 'yup';
 
 /**
  * MUTATIONS.
  */
-import { CREATE_USER_MUTATION } from 'api/mutation/authentication';
+import { CREATE_USER } from 'api/mutation/authentication';
 
 /**
  * COMPONENTS.
@@ -19,6 +20,9 @@ import Input from 'components/UI/Form/Input';
 import Label from 'components/UI/Form/Label';
 import FormRow from 'components/UI/Form/FormRow';
 
+/**
+ * VALIDATION SCHEMA.
+ */
 const validationSchema = yup.object().shape({
     email: yup.string().required(),
     password: yup
@@ -34,7 +38,7 @@ const validationSchema = yup.object().shape({
 });
 
 const SignUp = ({ onRedirectToLogin }) => {
-    const [createUser] = useMutation(CREATE_USER_MUTATION);
+    const [createUser] = useMutation(CREATE_USER);
     const {
         formState: { isSubmitting, isValid },
         handleSubmit,

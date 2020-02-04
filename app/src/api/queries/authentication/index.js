@@ -3,7 +3,7 @@
  */
 import gql from 'graphql-tag';
 
-export const USER_SESSION_QUERY = gql`
+export const USER_SESSION = gql`
     {
         userSession(me: true) {
             id,

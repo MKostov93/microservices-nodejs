@@ -3,9 +3,7 @@
  */
 import produce from 'immer';
 
-const initialState = {
-    message: null,
-};
+const initialState = null;
 
 const errorReducer = produce((draftState = initialState, action) => {
     const { type, payload } = action;
@@ -17,7 +15,7 @@ const errorReducer = produce((draftState = initialState, action) => {
 
     const [, , requestState] = matches;
 
-    draftState.message = requestState === 'FAILURE' ? payload.message : null;
+    return requestState === 'FAILURE' ? payload : null;
 });
 
 export default errorReducer;
