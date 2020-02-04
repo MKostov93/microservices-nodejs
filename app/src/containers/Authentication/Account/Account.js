@@ -15,7 +15,10 @@ import { DELETE_USER_SESSION } from 'api/mutation/authentication';
 /**
  * ACTIONS.
  */
-import { authLogoutSuccess } from 'store/modules/Authentication/actions';
+import {
+    authLogoutRequest,
+    authLogoutSuccess
+} from 'store/modules/Authentication/actions';
 
 /**
  * COMPONENTS
@@ -52,6 +55,8 @@ const Account = () => {
     const onDeleteUserSession = (event) => {
         event.preventDefault();
 
+        dispatch(authLogoutRequest());
+
         dispatch(authLogoutSuccess());
 
         deleteUserSession({ variables: { sessionId: session.id } });
@@ -65,7 +70,11 @@ const Account = () => {
             </AccountBody>
 
             <AccountActions>
-                <Button onClick={onDeleteUserSession}>Sign Out</Button>
+                <Button
+                    className="btn-block"
+                    onClick={onDeleteUserSession}>
+                    Sign Out
+                </Button>
             </AccountActions>
         </AccountContiainer>
     );

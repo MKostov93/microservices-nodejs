@@ -4,7 +4,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from "@apollo/react-hooks";
 
 /**
@@ -22,9 +22,13 @@ import {
 } from 'store/modules/Listings/actions';
 
 /**
+ * COMPONENTS.
+ */
+import CreateListing from './CreateListing/CreateListing';
+
+/**
  * STYLES.
  */
-
 const Listing = styled.div`
   padding: 1rem 0;
 
@@ -45,6 +49,7 @@ const Description = styled.p`
 
 const Listings = () => {
     const dispatch = useDispatch();
+    const listings = useSelector(state => state.listings);
     const { loading, error, data } = useQuery(LISTINGS);
 
     useEffect(() => {
@@ -61,20 +66,26 @@ const Listings = () => {
         }
     }, [loading, error, data]);
 
+    const listingItems = listings ?? data.listings;
+
     if (loading) {
         return 'Loading...';
     }
 
     return (
-        <div>
-            {data.listings.map(({ id, title, description }) => (
-                <Listing key={id}>
-                    <Title>{title}</Title>
+        <>
+            <div>
+                {listingItems.map(({ id, title, description }) => (
+                    <Listing key={id}>
+                        <Title>{title}</Title>
 
-                    <Description>{description}</Description>
-                </Listing>
-            ))}
-        </div>
+                        <Description>{description}</Description>
+                    </Listing>
+                ))}
+            </div>
+
+            <CreateListing />
+        </>
     );
 };
 

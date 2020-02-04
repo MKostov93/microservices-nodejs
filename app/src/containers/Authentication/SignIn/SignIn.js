@@ -97,6 +97,7 @@ const SignIn = () => {
 
             <FormRow>
                 <Button
+                    className="btn-block"
                     disabled={isSubmitting}
                     type="submit">
                     Sign In

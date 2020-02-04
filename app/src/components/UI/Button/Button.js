@@ -4,8 +4,7 @@
 import styled from "styled-components";
 
 const Button = styled.button`
-    display: block;
-    width: 100%;
+    display: inline-block;
     padding: 0.5rem;
     border: 0;
     background-color: ${({ theme }) => theme.mortar};
@@ -19,6 +18,11 @@ const Button = styled.button`
     &:disabled {
         pointer-events: none;
         opacity: 0.3;
+    }
+
+    &.btn-block {
+        display: block;
+        width: 100%;
     }
 `;
 

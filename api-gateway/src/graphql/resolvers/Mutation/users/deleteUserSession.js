@@ -4,11 +4,15 @@
 import UsersService from "../../../../adapters/UsersService";
 
 const deleteUserSessionResolver = async (obj, { sessionId }, { res }) => {
-    await UsersService.deleteUserSession({ sessionId });
+    try {
+        await UsersService.deleteUserSession({ sessionId });
 
-    res.clearCookie("userSessionId");
+        res.clearCookie("userSessionId");
 
-    return true;
+        return true;
+    } catch (err) {
+        throw err;
+    }
 };
 
 export default deleteUserSessionResolver;

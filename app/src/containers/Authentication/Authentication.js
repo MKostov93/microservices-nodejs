@@ -29,7 +29,8 @@ const Authentication = () => {
 
             <Button
                 type="button"
-                onClick={handleSwitchAuthMode}>
+                onClick={handleSwitchAuthMode}
+                className="btn-block">
                 Switch to {isSignup ? 'Sign Up' : 'Sign In'}
             </Button>
         </>

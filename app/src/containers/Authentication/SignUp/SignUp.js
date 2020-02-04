@@ -93,6 +93,7 @@ const SignUp = ({ onRedirectToLogin }) => {
 
             <FormRow>
                 <Button
+                    className="btn-block"
                     disabled={isSubmitting || !isValid}
                     type="submit">
                     Sign Up
