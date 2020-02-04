@@ -1,7 +1,7 @@
 /**
  * EXTERNAL DEPENDENCIES.
  */
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import { useDispatch } from "react-redux";
@@ -25,6 +25,7 @@ import {
 /**
  * CONTAINERS.
  */
+import Listings from "containers/Listings/Listings";
 import Authentication from 'containers/Authentication/Authentication';
 
 /**
@@ -58,26 +59,30 @@ const App = () => {
   const dispatch = useDispatch();
   const { loading, error, data } = useQuery(USER_SESSION);
 
-  if (loading) {
-    dispatch(authRequest());
-  }
+  useEffect(() => {
+    if (loading) {
+      dispatch(authRequest());
+    }
 
-  if (error) {
-    dispatch(authFailure(error));
-  }
+    if (error) {
+      dispatch(authFailure(error));
+    }
 
-  if (!loading && !data?.userSession) {
-    dispatch(authLogoutSuccess());
-  }
+    if (!loading && !data?.userSession) {
+      dispatch(authLogoutSuccess());
+    }
 
-  if (data?.userSession) {
-    dispatch(authSuccess(data.userSession));
-  }
+    if (data?.userSession) {
+      dispatch(authSuccess(data.userSession));
+    }
+  }, [loading, error, data]);
 
   return (
     <Wrapper>
       <Container>
-        <Content>Content</Content>
+        <Content>
+          <Listings />
+        </Content>
 
         <Sidebar>
           <Authentication />

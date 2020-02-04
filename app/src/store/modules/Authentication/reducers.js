@@ -13,9 +13,11 @@ const initialState = {
 };
 
 const authReducer = produce((draftState = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case actionTypes.AUTH_SUCCESS:
-      draftState.session = action.payload;
+      draftState.session = payload;
       break;
     case actionTypes.AUTH_LOGOUT_SUCCESS:
       draftState.session = null;
