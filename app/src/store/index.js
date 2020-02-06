@@ -1,33 +1,20 @@
 /**
  * EXTERNAL DEPENDENCIES.
  */
-import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import createSagaMiddleware from "redux-saga";
-
-/**
- * REDUCERS.
- */
-import * as reducers from "./modules";
+import { composeWithDevTools, devToolsEnhancer } from 'redux-devtools-extension';
+import { wrapStore } from 'redux-in-worker';
 
 /**
  * INITIALIZATION.
  */
 const configureStore = initialState => {
-  const rootReducer = combineReducers(reducers);
-  const composeEnhancers =
-    process.env.NODE_ENV === "development"
-      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-      : null;
-  const sagaMiddleware = createSagaMiddleware();
+  const remoteStore = new Worker('./worker.js', { type: 'module' });
 
-  return {
-    ...createStore(
-      rootReducer,
-      initialState,
-      composeEnhancers(applyMiddleware(sagaMiddleware))
-    ),
-    runSaga: sagaMiddleware.run
-  };
+  return wrapStore(
+    remoteStore,
+    initialState,
+    devToolsEnhancer(),
+  );
 };
 
 export default configureStore;

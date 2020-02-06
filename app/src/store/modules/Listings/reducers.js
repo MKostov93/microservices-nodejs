@@ -10,9 +10,7 @@ import * as actionTypes from './types'
 
 const initialState = [];
 
-const listingsReducer = produce((draftState = initialState, action) => {
-    const { type, payload } = action;
-
+const listingsReducer = produce((draftState = initialState, { type, payload }) => {
     switch (type) {
         case actionTypes.LISTINGS_SUCCESS:
             return [...payload];

@@ -12,9 +12,7 @@ const initialState = {
   session: null,
 };
 
-const authReducer = produce((draftState = initialState, action) => {
-  const { type, payload } = action;
-
+const authReducer = produce((draftState = initialState, { type, payload }) => {
   switch (type) {
     case actionTypes.AUTH_SUCCESS:
       draftState.session = payload;
