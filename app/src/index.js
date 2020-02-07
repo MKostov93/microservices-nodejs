@@ -38,6 +38,7 @@ import "index.css";
 import App from "App";
 
 const store = configureStore(window.REDUX_INITIAL_DATA);
+
 const app = (
   <Provider store={store}>
     <ApolloProvider client={graphqlClient}>

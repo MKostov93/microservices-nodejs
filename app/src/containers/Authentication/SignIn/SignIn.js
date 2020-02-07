@@ -32,7 +32,7 @@ import FormRow from 'components/UI/Form/FormRow';
 
 const SignIn = () => {
     const dispatch = useDispatch();
-    const error = useSelector(state => state.error);
+    const error = useSelector(state => state?.error);
     const [createUserSession] = useMutation(CREATE_USER_SESSION);
     const {
         formState: { isSubmitting },

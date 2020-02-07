@@ -5,8 +5,7 @@ import produce from 'immer';
 
 const initialState = null;
 
-const errorReducer = produce((draftState = initialState, action) => {
-    const { type, payload } = action;
+const errorReducer = produce((draftState = initialState, { type, payload }) => {
     const matches = /(.*)_(REQUEST|FAILURE)/.exec(type);
 
     if (!matches) {

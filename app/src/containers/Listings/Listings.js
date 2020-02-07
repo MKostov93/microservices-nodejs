@@ -49,7 +49,7 @@ const Description = styled.p`
 
 const Listings = () => {
     const dispatch = useDispatch();
-    const listings = useSelector(state => state.listings);
+    const listings = useSelector(state => state?.listings);
     const { loading, error, data } = useQuery(LISTINGS);
 
     useEffect(() => {
@@ -66,7 +66,7 @@ const Listings = () => {
         }
     }, [loading, error, data]);
 
-    const listingItems = listings ?? data.listings;
+    const listingItems = listings ?? data?.listings;
 
     if (loading) {
         return 'Loading...';
