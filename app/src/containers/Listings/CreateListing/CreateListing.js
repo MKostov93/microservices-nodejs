@@ -39,8 +39,8 @@ const CreateListing = () => {
         session,
         error
     } = useSelector(state => ({
-        session: state.auth.session,
-        error: state.error,
+        session: state?.auth?.session,
+        error: state?.error,
     }));
     const {
         formState: { isSubmitting },

@@ -48,7 +48,7 @@ const AccountActions = styled.div`
 `;
 
 const Account = () => {
-    const session = useSelector(state => state.auth.session);
+    const session = useSelector(state => state?.auth?.session);
     const dispatch = useDispatch();
     const [deleteUserSession] = useMutation(DELETE_USER_SESSION);
 

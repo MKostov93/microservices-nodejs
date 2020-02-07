@@ -15,7 +15,7 @@ import SignUp from './SignUp/SignUp';
 
 const Authentication = () => {
     const [isSignup, setIsSignup] = useState(false);
-    const session = useSelector(state => state.auth.session);
+    const session = useSelector(state => state?.auth?.session);
 
     if (session) {
         return <Account />;
