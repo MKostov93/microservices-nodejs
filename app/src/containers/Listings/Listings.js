@@ -2,15 +2,19 @@
  * EXTERNAL DEPENDENCIES.
  */
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 
 /**
  * QUERIES.
  */
 import { LISTINGS } from 'api/queries/listings';
+
+/**
+ * MUTATIONS.
+ */
+import { DELETE_LISTING } from 'api/mutation/listings';
 
 /**
  * ACTIONS.
@@ -19,37 +23,20 @@ import {
     listingsRequest,
     listingsSuccess,
     listingsFailure,
+    listingDeleteRequest,
+    listingDeleteSuccess,
 } from 'store/modules/Listings/actions';
 
 /**
  * COMPONENTS.
  */
 import CreateListing from './CreateListing/CreateListing';
-
-/**
- * STYLES.
- */
-const Listing = styled.div`
-  padding: 1rem 0;
-
-  :not(:last-child) {
-    border-bottom: 1px solid ${props => props.theme.veryLightGrey};
-  }
-`;
-
-const Title = styled.h4`
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 700;
-`;
-
-const Description = styled.p`
-  margin-bottom: 0;
-`;
+import Listing from 'components/UI/Listing/Listing';
 
 const Listings = () => {
     const dispatch = useDispatch();
     const listings = useSelector(state => state?.listings);
+    const [deleteListing] = useMutation(DELETE_LISTING);
     const { loading, error, data } = useQuery(LISTINGS);
 
     useEffect(() => {
@@ -68,6 +55,14 @@ const Listings = () => {
 
     const listingItems = listings ?? data?.listings;
 
+    const handleDeleteListing = (listingId) => {
+        dispatch(listingDeleteRequest());
+
+        deleteListing({ variables: { listingId: listingId } });
+
+        dispatch(listingDeleteSuccess(listingId));
+    };
+
     if (loading) {
         return 'Loading...';
     }
@@ -75,12 +70,11 @@ const Listings = () => {
     return (
         <>
             <div>
-                {listingItems.map(({ id, title, description }) => (
-                    <Listing key={id}>
-                        <Title>{title}</Title>
-
-                        <Description>{description}</Description>
-                    </Listing>
+                {listingItems.map(listingItem => (
+                    <Listing
+                        key={listingItem.id}
+                        listing={listingItem}
+                        onDelete={() => handleDeleteListing(listingItem.id)} />
                 ))}
             </div>
 

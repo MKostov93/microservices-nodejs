@@ -12,3 +12,9 @@ export const CREATE_LISTING = gql`
         }
     }
 `;
+
+export const DELETE_LISTING = gql`
+    mutation($listingId: ID!) {
+        deleteListing(listingId: $listingId)
+    }
+`;

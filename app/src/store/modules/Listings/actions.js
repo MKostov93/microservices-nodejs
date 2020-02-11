@@ -34,3 +34,17 @@ export const listingCreateFailure = (error) => ({
     payload: error
 });
 
+export const listingDeleteRequest = () => ({
+    type: actionTypes.LISTING_DELETE_REQUEST
+});
+
+export const listingDeleteSuccess = (listingId) => ({
+    type: actionTypes.LISTING_DELETE_SUCCESS,
+    payload: listingId
+});
+
+export const listingDeleteFailure = (error) => ({
+    type: actionTypes.LISTING_DELETE_FAILURE,
+    payload: error
+});
+

@@ -17,6 +17,8 @@ const listingsReducer = produce((draftState = initialState, { type, payload }) =
         case actionTypes.LISTING_CREATE_SUCCESS:
             draftState.push(payload);
             break;
+        case actionTypes.LISTING_DELETE_SUCCESS:
+            return draftState.filter(({ id }) => id !== payload);
         default:
             return draftState;
     }

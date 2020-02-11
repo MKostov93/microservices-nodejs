@@ -57,9 +57,9 @@ const Account = () => {
 
         dispatch(authLogoutRequest());
 
-        dispatch(authLogoutSuccess());
-
         deleteUserSession({ variables: { sessionId: session.id } });
+
+        dispatch(authLogoutSuccess());
     };
 
     return (
