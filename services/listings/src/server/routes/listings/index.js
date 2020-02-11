@@ -6,7 +6,11 @@ import express from "express";
 /**
  * CONTROLLERS.
  */
-import { getListings, createListing } from "../../controllers/listings";
+import {
+    getListings,
+    createListing,
+    deleteListing,
+} from "../../controllers/listings";
 
 /**
  * INITIALIZE.
@@ -18,5 +22,6 @@ const router = express.Router();
  */
 router.get("/listings", getListings);
 router.post("/listings", createListing);
+router.delete("/listings/:listingId", deleteListing);
 
 export default router;

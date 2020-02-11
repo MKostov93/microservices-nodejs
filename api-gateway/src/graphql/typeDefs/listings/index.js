@@ -16,6 +16,7 @@ const listingsTypeDefs = gql`
 
   extend type Mutation {
     createListing(title: String!, description: String!): Listing!
+    deleteListing(listingId: ID!): Boolean!
   }
 `;
 

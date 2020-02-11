@@ -15,7 +15,7 @@ export default class ListingsService {
     return await got
       .get(`${LISTINGS_SERVICE_URI}/listings`)
       .json();
-  }
+  };
 
   static async createListing({ title, description }) {
     return await got
@@ -23,5 +23,11 @@ export default class ListingsService {
         json: { title, description }
       })
       .json();
-  }
-}
+  };
+
+  static async deleteListing({ listingId }) {
+    return await got
+      .delete(`${LISTINGS_SERVICE_URI}/listings/${listingId}`)
+      .json();
+  };
+};

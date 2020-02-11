@@ -36,3 +36,23 @@ export const createListing = async (req, res, next) => {
     next(err);
   }
 };
+
+export const deleteListing = async (req, res, next) => {
+  try {
+    const listing = await Listing.findByPk(req.params.listingId);
+
+    if (!listing) {
+      return next(new Error('Invalid listing!'));
+    }
+
+    await listing.destroy();
+
+    return res.end();
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+
+    next(err);
+  }
+};
