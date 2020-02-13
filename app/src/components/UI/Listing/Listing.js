@@ -27,10 +27,12 @@ const Title = styled.h4`
   font-size: 1.5rem;
   font-weight: 700;
 `;
+Title.displayName = 'Title';
 
 const Description = styled.p`
   margin-bottom: 0;
 `;
+Description.displayName = 'Description';
 
 const Listing = ({
   listing: { title, description },
