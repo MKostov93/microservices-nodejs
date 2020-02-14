@@ -1,31 +1,24 @@
 /**
  * EXTERNAL DEPENDENCIES.
  */
-import Loadable from 'react-loadable';
+import loadable from '@loadable/component'
 
 /**
  * COMPONENTS.
  */
-const Listing = Loadable({
-    loader: () => import('containers/Listings/Listings'),
-    loading: () => null,
-});
-
-const About = Loadable({
-    loader: () => import('containers/About/About'),
-    loading: () => null,
-});
+const Listing = loadable(() => import('containers/Listings/Listings'));
+const About = loadable(() => import('containers/About/About'));
 
 const routes = [
     {
         path: '/',
         exact: true,
-        component: Listing
+        component: Listing,
     },
     {
         path: '/about',
         exact: true,
-        component: About
+        component: About,
     },
 ];
 
