@@ -1,7 +1,8 @@
 /**
  * EXTERNAL DEPENDENCIES.
  */
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
+import { Route, Switch } from 'react-router-dom';
 import styled from "styled-components";
 
 import { useDispatch } from "react-redux";
@@ -23,9 +24,13 @@ import {
 } from "store/modules/Authentication/actions";
 
 /**
+ * ROUTES.
+ */
+import routes from 'routes';
+
+/**
  * CONTAINERS.
  */
-import Listings from "containers/Listings/Listings";
 import Authentication from 'containers/Authentication/Authentication';
 
 /**
@@ -81,7 +86,13 @@ const App = () => {
     <Wrapper>
       <Container>
         <Content>
-          <Listings />
+          <Suspense fallback='Loading...'>
+            <Switch>
+              {routes.map(route => (
+                <Route key={route.path} {...route} />
+              ))}
+            </Switch>
+          </Suspense>
         </Content>
 
         <Sidebar>

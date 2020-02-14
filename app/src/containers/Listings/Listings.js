@@ -30,6 +30,7 @@ import {
 /**
  * COMPONENTS.
  */
+import PrefetchLink from 'hoc/PrefetchLink/PrefetchLink';
 import CreateListing from './CreateListing/CreateListing';
 import Listing from 'components/UI/Listing/Listing';
 
@@ -79,6 +80,8 @@ const Listings = () => {
             </div>
 
             <CreateListing />
+
+            <PrefetchLink to='/about'>About</PrefetchLink>
         </>
     );
 };
