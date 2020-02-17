@@ -6,6 +6,11 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 /**
+ * SELECTORS.
+ */
+import { isSignedIn } from 'store/modules/Authentication/selectors';
+
+/**
  * COMPONENTS.
  */
 import Button from 'components/UI/Button/Button';
@@ -15,9 +20,9 @@ import SignUp from './SignUp/SignUp';
 
 const Authentication = () => {
     const [isSignup, setIsSignup] = useState(false);
-    const session = useSelector(state => state?.auth?.session);
+    const isAuthenticated = useSelector(isSignedIn);
 
-    if (session) {
+    if (isAuthenticated) {
         return <Account />;
     }
 

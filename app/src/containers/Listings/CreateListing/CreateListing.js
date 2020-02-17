@@ -22,6 +22,11 @@ import {
 } from 'store/modules/Listings/actions';
 
 /**
+ * SELECTORS.
+ */
+import { getError } from 'store/modules/Error/selectors';
+
+/**
  * COMPONENTS.
  */
 import Error from 'components/UI/Error/Error';
@@ -34,24 +39,14 @@ import Button from 'components/UI/Button/Button';
 
 const CreateListing = () => {
     const dispatch = useDispatch();
+    const error = useSelector(getError);
     const [createListing] = useMutation(CREATE_LISTING);
-    const {
-        session,
-        error
-    } = useSelector(state => ({
-        session: state?.auth?.session,
-        error: state?.error,
-    }));
     const {
         formState: { isSubmitting },
         handleSubmit,
         register,
         reset
     } = useForm();
-
-    if (!session) {
-        return <p>Sign in to add listings.</p>;
-    }
 
     const onSubmit = handleSubmit(async ({ title, description }) => {
         try {

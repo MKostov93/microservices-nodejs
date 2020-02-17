@@ -21,6 +21,11 @@ import {
 } from 'store/modules/Authentication/actions';
 
 /**
+ * SELECTORS.
+ */
+import { getSession } from 'store/modules/Authentication/selectors';
+
+/**
  * COMPONENTS
  */
 import Button from 'components/UI/Button/Button';
@@ -48,7 +53,7 @@ const AccountActions = styled.div`
 `;
 
 const Account = () => {
-    const session = useSelector(state => state?.auth?.session);
+    const session = useSelector(getSession);
     const dispatch = useDispatch();
     const [deleteUserSession] = useMutation(DELETE_USER_SESSION);
 

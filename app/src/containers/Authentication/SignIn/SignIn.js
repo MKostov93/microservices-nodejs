@@ -22,6 +22,11 @@ import {
 } from 'store/modules/Authentication/actions';
 
 /**
+ * SELECTORS.
+ */
+import { getError } from 'store/modules/Error/selectors';
+
+/**
  * COMPONENTS.
  */
 import Error from 'components/UI/Error/Error';
@@ -32,7 +37,7 @@ import FormRow from 'components/UI/Form/FormRow';
 
 const SignIn = () => {
     const dispatch = useDispatch();
-    const error = useSelector(state => state?.error);
+    const error = useSelector(getError);
     const [createUserSession] = useMutation(CREATE_USER_SESSION);
     const {
         formState: { isSubmitting },

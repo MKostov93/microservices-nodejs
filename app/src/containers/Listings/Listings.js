@@ -28,6 +28,12 @@ import {
 } from 'store/modules/Listings/actions';
 
 /**
+ * SELECTORS.
+ */
+import { isSignedOut } from 'store/modules/Authentication/selectors';
+import { getListings } from 'store/modules/Listings/selectors';
+
+/**
  * COMPONENTS.
  */
 import PrefetchLink from 'hoc/PrefetchLink/PrefetchLink';
@@ -36,7 +42,8 @@ import Listing from 'components/UI/Listing/Listing';
 
 const Listings = () => {
     const dispatch = useDispatch();
-    const listings = useSelector(state => state?.listings);
+    const listings = useSelector(getListings);
+    const isNotAuthenticated = useSelector(isSignedOut);
     const [deleteListing] = useMutation(DELETE_LISTING);
     const { loading, error, data } = useQuery(LISTINGS);
 
@@ -79,7 +86,7 @@ const Listings = () => {
                 ))}
             </div>
 
-            <CreateListing />
+            {isNotAuthenticated ? <p>Sign in to add listings.</p> : < CreateListing />}
 
             <PrefetchLink to='/about'>About</PrefetchLink>
         </>
