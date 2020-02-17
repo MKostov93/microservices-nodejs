@@ -3,10 +3,9 @@
  */
 import React, { Suspense, useEffect } from "react";
 import { Route, Switch } from 'react-router-dom';
-import styled from "styled-components";
-
 import { useDispatch } from "react-redux";
 import { useQuery } from "@apollo/react-hooks";
+import styled from "styled-components";
 
 /**
  * QUERIES.

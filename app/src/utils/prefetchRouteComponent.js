@@ -13,6 +13,12 @@ import routes from 'routes';
  */
 import { isValidString } from 'utils';
 
+/**
+ * Finds the route which path matches the given path.
+ *
+ * @param {String} path
+ * @param {Array} routes
+ */
 const findRoute = (path, routes) => {
     const matchingRoutes = routes.find(({ path: routePath, exact }) => (
         matchPath(path, {
@@ -28,6 +34,11 @@ const findRoute = (path, routes) => {
     return matchingRoutes;
 };
 
+/**
+ * Prefetches a route component by a given path.
+ *
+ * @param {String} to
+ */
 const prefetchRouteComponent = to => {
     const path = isValidString(to) ? to : to.pathname;
     const matchingRoute = findRoute(path, routes);
