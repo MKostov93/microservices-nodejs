@@ -2,7 +2,7 @@
  * EXTERNAL DEPENDENCIES.
  */
 import React, { Suspense, useEffect } from "react";
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useQuery } from "@apollo/react-hooks";
 import styled from "styled-components";
@@ -19,25 +19,25 @@ import {
   authRequest,
   authSuccess,
   authFailure,
-  authLogoutSuccess,
+  authLogoutSuccess
 } from "store/modules/Authentication/actions";
 
 /**
  * ROUTES.
  */
-import routes from 'routes';
+import routes from "routes";
 
 /**
  * CONTAINERS.
  */
-import Authentication from 'containers/Authentication/Authentication';
+import Authentication from "containers/Authentication/Authentication";
 
 /**
  * STYLES.
  */
 const Wrapper = styled.div`
   position: relative;
-	overflow: hidden;
+  overflow: hidden;
   min-height: 100vh;
   padding: 1rem 0;
 `;
@@ -85,7 +85,7 @@ const App = () => {
     <Wrapper>
       <Container>
         <Content>
-          <Suspense fallback='Loading...'>
+          <Suspense fallback="Loading...">
             <Switch>
               {routes.map(route => (
                 <Route key={route.path} {...route} />
@@ -100,6 +100,6 @@ const App = () => {
       </Container>
     </Wrapper>
   );
-}
+};
 
 export default App;
