@@ -8,11 +8,11 @@ import loadable from '@loadable/component';
  */
 const Listing = loadable(() => import(
     /* webpackChunkName: "listing" */
-    'containers/Listings/Listings'
+    'containers/Listings/Listings.tsx'
 ));
 const About = loadable(() => import(
     /* webpackChunkName: "about" */
-    'containers/About/About'
+    'containers/About/About.tsx'
 ));
 
 const routes = [

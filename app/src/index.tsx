@@ -4,7 +4,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
 import { ThemeProvider } from "styled-components";
 
@@ -26,7 +26,7 @@ import configureStore from "store";
 /**
  * THEME.
  */
-import * as theme from "theme";
+import { theme } from "theme";
 
 /**
  * STYLES.
@@ -38,7 +38,7 @@ import "index.css";
  */
 import App from "App";
 
-const store = configureStore(window.REDUX_INITIAL_DATA);
+const store = configureStore((window as any).REDUX_INITIAL_DATA);
 
 const app = (
   <Provider store={store}>

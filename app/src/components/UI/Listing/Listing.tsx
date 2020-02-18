@@ -1,15 +1,25 @@
 /**
  * EXTERNAL DEPENDENCIES.
  */
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
+
+/**
+ * SELECTORS.
+ */
+import { isSignedIn } from "store/modules/Authentication/selectors";
 
 /**
  * COMPONENTS.
  */
-import Button from 'components/UI/Button/Button';
+import Button from "components/UI/Button/Button";
+
+/**
+ * MODELS.
+ */
+import { IListingProps } from "models/Listing";
 
 /**
  * STYLES.
@@ -32,11 +42,11 @@ const Description = styled.p`
   margin-bottom: 0;
 `;
 
-const Listing = ({
+const Listing: React.FC<IListingProps> = ({
   listing: { title, description },
   onDelete
 }) => {
-  const session = useSelector(state => state?.auth?.session);
+  const isAuthenticated = useSelector(isSignedIn);
 
   return (
     <ListingContainer>
@@ -44,7 +54,7 @@ const Listing = ({
 
       <Description>{description}</Description>
 
-      {session && <Button onClick={onDelete}>Delete</Button>}
+      {isAuthenticated && <Button onClick={onDelete}>Delete</Button>}
     </ListingContainer>
   );
 };
