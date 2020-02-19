@@ -4,7 +4,8 @@
  * @param  {*}  value
  * @return {boolean}  True if is not set, False otherwise.
  */
-export const isNil = value => Boolean(typeof value === 'undefined' || value === null);
+export const isNil = (value: any) =>
+  Boolean(typeof value === "undefined" || value === null);
 
 /**
  * Determines if Symbol.
@@ -12,7 +13,7 @@ export const isNil = value => Boolean(typeof value === 'undefined' || value === 
  * @param   {*} value
  * @returns {Boolean} True if Symbol, False otherwise.
  */
-export const isSymbol = value => Boolean(typeof value === 'symbol');
+export const isSymbol = (value: any) => Boolean(typeof value === "symbol");
 
 /**
  * Gets Symbol value.
@@ -20,7 +21,7 @@ export const isSymbol = value => Boolean(typeof value === 'symbol');
  * @param   {Symbol} symbol
  * @returns {String} Returns the description of the Symbol.
  */
-export const getSymbolValue = symbol => symbol.description;
+export const getSymbolValue = (symbol: symbol) => symbol.description;
 
 /**
  * Determines if value is empty.
@@ -28,7 +29,7 @@ export const getSymbolValue = symbol => symbol.description;
  * @param  {*}  value
  * @return {boolean}  True if is empty, False otherwise.
  */
-export const isEmpty = value => Boolean(!(value && value.length > 0));
+export const isEmpty = (value: any) => Boolean(!(value && value.length > 0));
 
 /**
  * Checks if the given value is valid string.
@@ -36,4 +37,5 @@ export const isEmpty = value => Boolean(!(value && value.length > 0));
  * @param  {*}  value;
  * @return {Boolean} True if a valid string, False otherwise.
  */
-export const isValidString = value => Boolean(!isNil(value) && typeof value === "string" && !isEmpty(value.trim()));
+export const isValidString = (value: any) =>
+  Boolean(!isNil(value) && typeof value === "string" && !isEmpty(value.trim()));

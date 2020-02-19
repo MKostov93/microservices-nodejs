@@ -19,7 +19,7 @@ import Button from "components/UI/Button/Button";
 /**
  * MODELS.
  */
-import { IListingProps } from "models/Listing";
+import { IListing } from "models/Listing";
 
 /**
  * STYLES.
@@ -42,7 +42,15 @@ const Description = styled.p`
   margin-bottom: 0;
 `;
 
-const Listing: React.FC<IListingProps> = ({
+/**
+ * TYPES.
+ */
+type ListingProps = {
+  listing: IListing;
+  onDelete: () => void;
+};
+
+const Listing: React.FC<ListingProps> = ({
   listing: { title, description },
   onDelete
 }) => {

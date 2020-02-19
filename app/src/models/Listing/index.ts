@@ -1,10 +1,8 @@
-export interface IListing {
-  id: string;
+export interface IListingData {
   title: string;
   description: string;
 }
 
-export interface IListingProps {
-  listing: IListing;
-  onDelete: () => void;
+export interface IListing extends IListingData {
+  id: string;
 }
