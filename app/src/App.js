@@ -4,8 +4,12 @@
 import React, { Suspense, useEffect } from "react";
 import { Route, Switch } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { useQuery } from "@apollo/react-hooks";
 import styled from "styled-components";
+
+/**
+ * GRAPHQL CLIENT.
+ */
+import graphqlClient from "api/graphqlClient";
 
 /**
  * QUERIES.
@@ -61,25 +65,30 @@ const Content = styled.div`
 
 const App = () => {
   const dispatch = useDispatch();
-  const { loading, error, data } = useQuery(USER_SESSION);
 
   useEffect(() => {
-    if (loading) {
+    const fetchData = async () => {
+      const {
+        data: {
+          userSession
+        }
+      } = await graphqlClient.query({ query: USER_SESSION});
+
       dispatch(authRequest());
+
+      try {
+        if (!userSession) {
+          dispatch(authLogoutSuccess());
+        }
+
+        dispatch(authSuccess(userSession));
+      } catch (error) {
+        dispatch(authFailure(error));
+      }
     }
 
-    if (error) {
-      dispatch(authFailure(error));
-    }
-
-    if (!loading && !data?.userSession) {
-      dispatch(authLogoutSuccess());
-    }
-
-    if (data?.userSession) {
-      dispatch(authSuccess(data.userSession));
-    }
-  }, [loading, error, data]);
+    fetchData();
+  }, []);
 
   return (
     <Wrapper>

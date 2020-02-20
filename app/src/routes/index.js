@@ -6,7 +6,7 @@ import loadable from '@loadable/component';
 /**
  * COMPONENTS.
  */
-const Listing = loadable(() => import(
+const Listings = loadable(() => import(
     /* webpackChunkName: "listing" */
     'containers/Listings/Listings'
 ));
@@ -19,7 +19,7 @@ const routes = [
     {
         path: '/',
         exact: true,
-        component: Listing,
+        component: Listings,
     },
     {
         path: '/about',
