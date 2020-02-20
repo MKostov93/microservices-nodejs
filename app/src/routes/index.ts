@@ -11,7 +11,7 @@ import { RouteInfo } from 'models/Route';
 /**
  * COMPONENTS.
  */
-const Listing = loadable(() =>
+const Listings = loadable(() =>
   import(
     /* webpackChunkName: "listing" */
     "containers/Listings/Listings"
@@ -28,7 +28,7 @@ const routes: RouteInfo[] = [
   {
     path: "/",
     exact: true,
-    component: Listing
+    component: Listings
   },
   {
     path: "/about",

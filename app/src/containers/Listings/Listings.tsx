@@ -1,11 +1,11 @@
 /**
  * EXTERNAL DEPENDENCIES.
  */
-import React, { useEffect } from "react";
+import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useQuery, useMutation } from "@apollo/react-hooks";
-import { RouteComponentProps } from "react-router-dom";
+import { useQuery } from "react-apollo";
+import { useMutation } from "@apollo/react-hooks";
 
 /**
  * QUERIES.
@@ -25,7 +25,8 @@ import {
   listingsSuccess,
   listingsFailure,
   listingDeleteRequest,
-  listingDeleteSuccess
+  listingDeleteSuccess,
+  listingDeleteFailure
 } from "store/modules/Listings/actions";
 
 /**
@@ -37,7 +38,6 @@ import { IListing } from "models/Listing";
  * SELECTORS.
  */
 import { isSignedOut } from "store/modules/Authentication/selectors";
-import { getListings } from "store/modules/Listings/selectors";
 
 /**
  * COMPONENTS.
@@ -46,55 +46,61 @@ import PrefetchLink from "hoc/PrefetchLink/PrefetchLink";
 import CreateListing from "./CreateListing/CreateListing";
 import Listing from "components/UI/Listing/Listing";
 
+/**
+ * UTILS.
+ */
+import { isEmpty } from 'utils';
+
 const Listings = () => {
   const dispatch = useDispatch();
-  const listings = useSelector(getListings);
   const isNotAuthenticated = useSelector(isSignedOut);
   const [deleteListing] = useMutation(DELETE_LISTING);
-  const { loading, error, data } = useQuery(LISTINGS);
-
-  useEffect(() => {
-    if (loading) {
-      dispatch(listingsRequest());
-    }
-
-    if (error) {
-      dispatch(listingsFailure(error));
-    }
-
-    if (data?.listings) {
-      dispatch(listingsSuccess(data.listings));
-    }
-  }, [loading, error, data]);
-
-  const listingItems = listings ?? data?.listings;
-
-  const handleDeleteListing = (listingId: string) => {
-    dispatch(listingDeleteRequest());
-
-    deleteListing({ variables: { listingId: listingId } });
-
-    dispatch(listingDeleteSuccess(listingId));
-  };
+  const { loading, error, data, refetch } = useQuery(LISTINGS);
 
   if (loading) {
-    return "Loading...";
+    dispatch(listingsRequest());
+
+    return 'Loading...';
+  }
+
+  if (error) {
+    dispatch(listingsFailure(error));
+  }
+
+  if (data?.listings) {
+    dispatch(listingsSuccess(data.listings));
+  }
+
+  const handleDeleteListing = async (listingId: string) => {
+    dispatch(listingDeleteRequest());
+
+    try {
+      await deleteListing({ variables: { listingId: listingId } });
+
+      dispatch(listingDeleteSuccess(listingId));
+
+      refetch();
+    } catch (error) {
+      dispatch(listingDeleteFailure(error));
+    }
+  };
+
+  const handleCreateListing = () => {
+    refetch();
   }
 
   return (
     <>
       <div>
-        {listingItems.length &&
-          listingItems.map((listingItem: IListing) => (
-            <Listing
-              key={listingItem.id}
-              listing={listingItem}
-              onDelete={() => handleDeleteListing(listingItem.id)}
-            />
-          ))}
+        {!isEmpty(data.listings) ? data.listings.map((listingItem: IListing) => (
+          <Listing
+            key={listingItem.id}
+            listing={listingItem}
+            onDelete={() => handleDeleteListing(listingItem.id)} />
+        )) : <h2>No listings found!</h2>}
       </div>
 
-      {isNotAuthenticated ? <p>Sign in to add listings.</p> : <CreateListing />}
+      {isNotAuthenticated ? <p>Sign in to add listings.</p> : <CreateListing onCreateListing={handleCreateListing} />}
 
       <PrefetchLink to="/about">About</PrefetchLink>
     </>

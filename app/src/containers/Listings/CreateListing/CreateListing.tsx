@@ -37,7 +37,11 @@ import Input from 'components/UI/Form/Input';
 import Textarea from 'components/UI/Form/Textarea';
 import Button from 'components/UI/Button/Button';
 
-const CreateListing = () => {
+type CreateListingProps = {
+    onCreateListing: () => void;
+}
+
+const CreateListing: React.FC<CreateListingProps> = ({ onCreateListing }) => {
     const dispatch = useDispatch();
     const error = useSelector(getError);
     const [createListing] = useMutation(CREATE_LISTING);
@@ -68,6 +72,8 @@ const CreateListing = () => {
             if (createdListing) {
                 dispatch(listingCreateSuccess(createdListing));
             }
+
+            onCreateListing();
         } catch (err) {
             dispatch(listingCreateFailure(err.graphQLErrors[0]));
         }
