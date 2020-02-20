@@ -8,7 +8,7 @@ import React from "react";
  */
 import PrefetchLink from "hoc/PrefetchLink/PrefetchLink";
 
-const About = () => {
+const About: React.FC = () => {
   return (
     <div>
       <p>About page</p>

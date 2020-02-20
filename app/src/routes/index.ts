@@ -1,8 +1,12 @@
 /**
  * EXTERNAL DEPENDENCIES.
  */
-import { RouteProps } from "react-router-dom";
 import loadable from "@loadable/component";
+
+/**
+ * INTERFACES.
+ */
+import { RouteInfo } from 'models/Route';
 
 /**
  * COMPONENTS.
@@ -20,7 +24,7 @@ const About = loadable(() =>
   )
 );
 
-const routes: RouteProps[] = [
+const routes: RouteInfo[] = [
   {
     path: "/",
     exact: true,

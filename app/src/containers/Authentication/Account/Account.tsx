@@ -52,7 +52,7 @@ const AccountActions = styled.div`
   margin-top: 0.25rem;
 `;
 
-const Account = () => {
+const Account: React.FC = () => {
   const session = useSelector(getSession);
   const dispatch = useDispatch();
   const [deleteUserSession] = useMutation(DELETE_USER_SESSION);

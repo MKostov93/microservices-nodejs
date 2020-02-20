@@ -1,12 +1,17 @@
 /**
  * EXTERNAL DEPENDENCIES.
  */
-import { RouteProps, matchPath } from "react-router-dom";
+import { matchPath } from "react-router-dom";
 
 /**
  * ROUTES.
  */
 import routes from "routes";
+
+/**
+ * INTERFACES.
+ */
+import { RouteInfo } from 'models/Route';
 
 /**
  * UTILS.
@@ -22,8 +27,8 @@ import { isValidString } from "utils";
  */
 const findRoute = (
   path: string,
-  routes: RouteProps[]
-): RouteProps | undefined => {
+  routes: RouteInfo[]
+): RouteInfo | undefined => {
   const matchingRoutes = routes.find(({ path: routePath, exact }) =>
     matchPath(path, {
       exact,

@@ -47,7 +47,7 @@ const Description = styled.p`
  */
 type ListingProps = {
   listing: IListing;
-  onDelete: () => void;
+  onDelete?: () => void;
 };
 
 const Listing: React.FC<ListingProps> = ({

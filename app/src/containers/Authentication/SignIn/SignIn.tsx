@@ -35,7 +35,7 @@ import Input from 'components/UI/Form/Input';
 import Label from 'components/UI/Form/Label';
 import FormRow from 'components/UI/Form/FormRow';
 
-const SignIn = () => {
+const SignIn: React.FC = () => {
     const dispatch = useDispatch();
     const error = useSelector(getError);
     const [createUserSession] = useMutation(CREATE_USER_SESSION);

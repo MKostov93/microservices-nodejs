@@ -18,7 +18,7 @@ import Account from './Account/Account';
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
 
-const Authentication = () => {
+const Authentication: React.FC = () => {
     const [isSignup, setIsSignup] = useState(false);
     const isAuthenticated = useSelector(isSignedIn);
 

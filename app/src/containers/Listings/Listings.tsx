@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useQuery, useMutation } from "@apollo/react-hooks";
+import { RouteComponentProps } from "react-router-dom";
 
 /**
  * QUERIES.
